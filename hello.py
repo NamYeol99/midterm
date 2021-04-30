@@ -1,22 +1,22 @@
 import time
-
+import random
 dict_a = {
     "직업": "전사",
     "무기": "검",
-    "체력": "120",
-    "공격력": "50"
+    "체력": 120,
+    "공격력": 50
 }
 dict_b ={
     "직업": "궁수",
     "무기": "활",
-    "체력": "100",
-    "공격력": "60"
+    "체력": 100,
+    "공격력": 60
 }
 dict_c ={
     "직업": "법사",
     "무기": "지팡이",
-    "체력": "80",
-    "공격력": "70"
+    "체력": 80,
+    "공격력": 70
 }
 
 print("게임을 시작합니다.")	
@@ -105,68 +105,107 @@ elif(job == dict_b["직업"]) :
 elif(job == dict_c["직업"]) :
     hp = dict_c["체력"]
     power = dict_c["공격력"]
-a_1= 50
+a_1hp= 50
+a_1power = 10
+
 time.sleep(0.5)
 print("1-1단계 몬스터(HP50)")
-while a_1 > 0 :
+while a_1hp > 0 :
     time.sleep(1)
     print("1.공격 2.회피")
     b = input()
     if(b == '1') :
-        if(a_1 <= int(power)) :
-            a_1 = a_1 - int(power)
+        list = []
+        ran_num = random.randint(0, 2)
+        list.append(ran_num)
+        if(list == [0]) :
+            hp = hp- a_1power
+            print(a_1power,"만큼의 데미지를 입었습니다\n남은체력:",hp)
+            time.sleep(1)
+        if(a_1hp <= power) :
+            a_1hp = a_1hp - power
             print("1-1단계를 클리어 하셨습니다")
             print("클리어보상 : 1.공격력+5 2.HP+10")
             c = input()
             if (c == '1') :
-                power = int(power) + 5
+                power = power + 5
             elif (c == '2') :
-                hp = int(hp) + 10
-        elif (a_1>int(power)) :
-            a_1 = a_1 - int(power)
+                hp = hp + 10
+        elif (a_1hp>power) :
+            a_1hp = a_1hp - power
             print("몬스터에게",power,"만큼의 데미지가 들어갔습니다\n  남은체력:",a_1)
 
 a_2 = 70
+a_2power = 20
 print("1-2단계 몬스터(HP70)")
 while a_2 > 0 :
     time.sleep(1)
+    list = []
+    ran_num = random.randint(0, 1)
+    list.append(ran_num)
+    list_a = []
+    ran_g = random.randint(0, 2)
+    list_a.append(ran_g)
+    print(list)
+    print(list_a)
+    if(list == [0]) :
+        print("몬스터가 공격을 준비하고 있습니다") 
+    elif(list == [1]) :
+        print("몬스터가 회피를 준비하고 있습니다")
     print("1.공격 2.회피")
     b = input()
     if(b == '1') :
-        if(a_2 <= int(power)) :
-            a_2 = a_2 - int(power)
-            print("1-2단계를 클리어 하셨습니다")
-            print("클리어보상 : 1.공격력+7 2.HP+14")
-            c = input()
-            if (c == '1') :
-                power = int(power) + 7
-            elif (c == '2') :
-                hp = int(hp) + 14
-        elif (a_2>int(power)) :
-            a_2 = a_2 - int(power)
-            print("몬스터에게",power,"만큼의 데미지가 들어갔습니다\n남은체력:",a_2)
+        if(list == [0]) :
+            hp = hp - a_2power
+            print(a_1power,"만큼의 데미지를 입었습니다\n남은체력:",hp)
+            time.sleep(1)
+        elif(list == [1]) :
+            if(list_a == [0]) :
+                print("공격이 빗나갔습니다")
+            elif(list_a == [1] or list_a == [2]): 
+                if(a_2 <= power) :
+                    a_2 = a_2 - power
+                    print("1-2단계를 클리어 하셨습니다")
+                    print("클리어보상 : 1.공격력+7 2.HP+14")
+                    c = input()
+                    if (c == '1') :
+                        power = power + 7
+                    elif (c == '2') :
+                        hp = hp + 14
+                elif (a_2>power) :
+                    a_2 = a_2 - power
+                    print("몬스터에게",power,"만큼의 데미지가 들어갔습니다\n남은체력:",a_2)
+    elif(b == '2') :
+        if(list == [0]):
+            if(list_a == [0] or list_a == [1]):
+                print("공격을 회피 했습니다")
+            elif(list_a == [2]):
+                hp = hp - a_2power
+                print("회피에 실패했습니다")
+                print(a_2power,"만큼의 데미지를 입었습니다\n남은체력:",hp)
+        elif(list == [1]):
+            print("아무일도 일어나지 않았습니다")
 time.sleep(1)
 a_3 = 500
-print("1-3단계 BOSS")
+print("1-3단계 BOSS(HP500)")
 while a_3 > 0 :
     time.sleep(0.5)
     print("1.공격 2.회피")
     b = input()
     if(b == '1') :
-        if(a_3 <= int(power)) :
-            a_3 = a_3 - int(power)
+        if(a_3 <= power) :
+            a_3 = a_3 - power
             print("1-3단계를 클리어 하셨습니다")
             time.sleep(1)
             print("클리어보상 : 1.공격력+10 2.HP+20")
             c = input()
             if (c == '1') :
-                power = int(power) + 10
+                power = power + 10
             elif (c == '2') :
-                hp = int(hp) + 20
-        elif (a_3>int(power)) :
-            a_3 = a_3 - int(power)
+                hp = hp + 20
+        elif (a_3>power) :
+            a_3 = a_3 - power
             print("몬스터에게",power,"만큼의 데미지가 들어갔습니다\n남은체력:",a_3)
-
 
 
 
