@@ -63,7 +63,7 @@ if(job == '1') :
     # "\n체력:",
     # dict_a["체력"],
     # "\n공격력:",
-    # dict_a["공격력"])
+    # dict_a["공격력"]) 
     for key in dict_a:
         print(key, ":", dict_a[key])
 elif(job == '2') :
