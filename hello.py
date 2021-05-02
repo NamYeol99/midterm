@@ -1,5 +1,18 @@
-import time
-import random
+
+############### 게임 설명 #################
+        ## 체력이 0될시 게임종료
+        ## 캐릭터 회피 확률 66퍼
+        ## 몬스터가 회피시 공격이 빗나갈확률 33퍼
+
+
+import time ## 연속적으로 나오는 채팅 시간간격 주기위함
+import random ## 회피를 하기위함
+#### 함수 사용 ####
+def attack() :
+    print("몬스터가 공격을 준비하고 있습니다")
+def miss() :
+    print("몬스터가 회피를 준비하고 있습니다")
+#### 딕셔너리 사용 ####
 dict_a = {
     "직업": "전사",
     "무기": "검",
@@ -24,10 +37,6 @@ time.sleep(1)
 a='1'
 while a == '1'  :
     print("1.직업 능력치 정보보기 2.직업 선택")
-    # "1.",dict_a["직업"], 
-    # "2.",dict_b["직업"], 
-    # "3.",dict_c["직업"],
-    # "4. 직업 능력치 정보")
     a = input()
     time.sleep(1)
     if(a == '1') :
@@ -105,13 +114,16 @@ elif(job == dict_b["직업"]) :
 elif(job == dict_c["직업"]) :
     hp = dict_c["체력"]
     power = dict_c["공격력"]
-a_1hp= 50
+
+## 1-1스테이지 정보
+a_1hp = 50
 a_1power = 10
 
 time.sleep(0.5)
 print("1-1단계 몬스터(HP50)")
 while a_1hp > 0 and hp > 0:
     time.sleep(1)
+    #### 리스트 사용 ####
     list = []
     ran_num = random.randint(0, 1)
     list.append(ran_num)
@@ -119,15 +131,18 @@ while a_1hp > 0 and hp > 0:
     ran_g = random.randint(0, 2)
     list_a.append(ran_g)
     if(list == [0]) :
-        print("몬스터가 공격을 준비하고 있습니다") 
+        attack()
     elif(list == [1]) :
-        print("몬스터가 회피를 준비하고 있습니다")
+        miss()
     print("1.공격 2.회피")
     b = input()
     if(b == '1') :
         if(list == [0]) :
             hp = hp - a_1power
             print(a_1power,"만큼의 데미지를 입었습니다\n캐릭터 남은체력:",hp)
+            if(hp <= 0) :
+                print("캐릭터가 사망 하였습니다 게임을 종료합니다")
+                break
             time.sleep(1)
             if(a_1hp <= power) :
                 a_1hp = a_1hp - power
@@ -168,10 +183,13 @@ while a_1hp > 0 and hp > 0:
                 hp = hp - a_1power
                 print("회피에 실패했습니다")
                 print(a_1power,"만큼의 데미지를 입었습니다\n캐릭터 남은체력:",hp)
+                if(hp <= 0) :
+                    print("캐릭터가 사망 하였습니다 게임을 종료합니다")
+                    break
         elif(list == [1]):
             print("아무일도 일어나지 않았습니다")
     time.sleep(1)
-
+## 1-2스테이지정보
 a_2hp = 70
 a_2power = 20
 print("1-2단계 몬스터(HP70)")
@@ -184,15 +202,18 @@ while a_2hp > 0 and hp > 0 :
     ran_g = random.randint(0, 2)
     list_a.append(ran_g)
     if(list == [0]) :
-        print("몬스터가 공격을 준비하고 있습니다") 
+        attack()
     elif(list == [1]) :
-        print("몬스터가 회피를 준비하고 있습니다")
+        miss()
     print("1.공격 2.회피")
     b = input()
     if(b == '1') :
         if(list == [0]) :
             hp = hp - a_2power
             print(a_2power,"만큼의 데미지를 입었습니다\n캐릭터 남은체력:",hp)
+            if(hp <= 0) :
+                print("캐릭터가 사망 하였습니다 게임을 종료합니다")
+                break
             time.sleep(1)
             if(a_2hp <= power) :
                 a_2hp = a_2hp - power
@@ -233,9 +254,13 @@ while a_2hp > 0 and hp > 0 :
                 hp = hp - a_2power
                 print("회피에 실패했습니다")
                 print(a_2power,"만큼의 데미지를 입었습니다\n캐릭터 남은체력:",hp)
+                if(hp <= 0) :
+                    print("캐릭터가 사망 하였습니다 게임을 종료합니다")
+                    break
         elif(list == [1]):
             print("아무일도 일어나지 않았습니다")
 time.sleep(1)
+## 1-3 스테이지 정보
 a_3hp = 500
 a_3power = 40
 print("1-3단계 BOSS(HP500)")
@@ -248,16 +273,16 @@ while a_3hp > 0 and hp > 0:
     ran_g = random.randint(0, 2)
     list_a.append(ran_g)
     if(list == [0]) :
-        print("몬스터가 공격을 준비하고 있습니다") 
+        attack()
     elif(list == [1]) :
-        print("몬스터가 회피를 준비하고 있습니다")
+        miss()
     print("1.공격 2.회피")
     b = input()
     if(b == '1') :
         if(list == [0]) :
             hp = hp - a_3power
             print(a_3power,"만큼의 데미지를 입었습니다\n캐릭터 남은체력:",hp)
-            if(hp < 0) :
+            if(hp <= 0) :
                 print("캐릭터가 사망 하였습니다 게임을 종료합니다")
                 break
             time.sleep(1)
@@ -300,7 +325,7 @@ while a_3hp > 0 and hp > 0:
                 hp = hp - a_3power
                 print("회피에 실패했습니다")
                 print(a_3power,"만큼의 데미지를 입었습니다\n캐릭터 남은체력:",hp)
-                if(hp < 0) :
+                if(hp <= 0) :
                     print("캐릭터가 사망 하였습니다 게임을 종료합니다")
                     break
         elif(list == [1]):
