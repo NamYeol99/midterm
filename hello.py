@@ -260,7 +260,7 @@ while a_2hp > 0 and hp > 0 :
         elif(list == [1]):
             print("아무일도 일어나지 않았습니다")
 time.sleep(1)
-## 1-3 스테이지 정보
+## 1-3 스테이지 정보  
 a_3hp = 500
 a_3power = 40
 print("1-3단계 BOSS(HP500)")
